@@ -1,5 +1,7 @@
-FROM mysql:8.0.30
-COPY ./db/conf.d /etc/mysql/conf.d
-COPY ./db/initdb.d /docker-entrypoint-initdb.d
+# -d: 백그라운드 실행, --force-recreate: 강제 재생성
+db-up:
+	docker-compose up -d --build --force-recreate
 
-RUN chmod 644 /etc/mysql/conf.d/my.cnf
+# -v: volume 삭제
+db-down:
+	docker-compose down -v
